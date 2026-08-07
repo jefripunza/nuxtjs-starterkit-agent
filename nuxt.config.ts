@@ -10,8 +10,5 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'node-server'
   },
-  ssr: true,
-  routeRules: {
-    '/': { ssr: false }
-  }
+  ssr: true
 })
