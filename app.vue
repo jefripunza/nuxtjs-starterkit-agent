@@ -5,20 +5,21 @@
       <div class="inline-flex items-center justify-between bg-white/80 backdrop-blur-xl border border-portrait-mist/80 rounded-pill px-4 py-2 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300"
            :class="menuOpen ? 'w-14' : 'w-auto'">
         
-        <!-- Desktop Nav / Brand -->
+        <!-- Desktop Nav Links (Centered) -->
         <div class="flex items-center gap-6 transition-opacity duration-200" :class="menuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'">
-          <NuxtLink to="/" class="text-portrait-ink font-display font-semibold text-base tracking-tight hover:text-portrait-teal transition-colors px-3">
+          <NuxtLink to="/" class="text-portrait-ink font-display font-semibold text-base tracking-tight hover:text-portrait-teal transition-colors px-3"
+            :class="route.path === '/' ? 'text-portrait-ink font-bold underline underline-offset-4 decoration-2' : ''">
             Home
           </NuxtLink>
           <span class="w-px h-5 bg-portrait-ash"></span>
-          <NuxtLink :to="item.to" v-for="item in menuItems" :key="item.to" 
+          <NuxtLink v-for="item in menuItems" :key="item.to" :to="item.to" 
             class="text-portrait-slate text-sm font-medium hover:text-portrait-ink transition-colors px-3"
-            :class="route.path === item.to ? 'text-portrait-ink font-bold' : ''">
+            :class="route.path === item.to ? 'text-portrait-ink font-bold underline underline-offset-4 decoration-2' : ''">
             {{ item.label }}
           </NuxtLink>
         </div>
 
-        <!-- Mobile Hamburger -->
+        <!-- Mobile Hamburger (Always Visible in Mobile) -->
         <button
           ref="hamburger"
           class="md:hidden w-11 h-11 flex items-center justify-center rounded-full hover:bg-portrait-mist/30 transition-colors relative z-10"
