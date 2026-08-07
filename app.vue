@@ -45,8 +45,9 @@
       <div
         v-if="menuOpen"
         ref="menuPanel"
-        class="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl border-l border-portrait-mist/60 flex flex-col md:hidden"
+        class="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl border-l border-portrait-mist/60 flex flex-col md:hidden translate-x-full"
       >
+
         <!-- Menu Header -->
         <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-portrait-mist/60">
           <span class="font-display font-semibold text-portrait-ink">Menu</span>
