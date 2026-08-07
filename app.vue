@@ -108,17 +108,14 @@ function closeMenu() {
 // Animate panel slide-in/out
 watch(menuOpen, (open) => {
   if (open) {
-    // Prevent body scroll when menu is open
     document.body.style.overflow = 'hidden'
-    // Small delay for DOM to render
-    setTimeout(() => {
-      if (menuPanel.value) {
-        gsap.fromTo(menuPanel.value,
-          { x: '100%' },
-          { x: '0%', duration: 0.35, ease: 'power3.out' }
-        )
-      }
-    }, 10)
+    // REMOVED setTimeout to prevent delay
+    if (menuPanel.value) {
+      gsap.fromTo(menuPanel.value,
+        { x: '100%' },
+        { x: '0%', duration: 0.3, ease: 'power3.out' }
+      )
+    }
   } else {
     document.body.style.overflow = ''
   }
