@@ -19,7 +19,7 @@
           </NuxtLink>
         </div>
 
-        <!-- Mobile Hamburger (Always Visible in Mobile) -->
+        <!-- Mobile Hamburger (ALWAYS VISIBLE ON MOBILE) -->
         <button
           ref="hamburger"
           class="md:hidden w-11 h-11 flex items-center justify-center rounded-full hover:bg-portrait-mist/30 transition-colors relative z-10"
