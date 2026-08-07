@@ -15,7 +15,7 @@
     </nav>
 
     <!-- Page Content -->
-    <slot />
+    <NuxtPage />
   </div>
 </template>
 
