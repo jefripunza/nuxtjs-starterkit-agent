@@ -1,34 +1,37 @@
 <template>
   <div class="min-h-screen bg-portrait-canvas font-body text-portrait-body">
     <!-- Sticky Nav Pill -->
-    <nav class="sticky top-6 z-50 flex justify-between items-center px-4 max-w-5xl mx-auto">
-      <!-- Brand -->
-      <NuxtLink to="/" class="text-portrait-ink font-display font-semibold text-base tracking-tight hover:text-portrait-teal transition-colors bg-white/80 backdrop-blur-xl border border-portrait-mist/80 rounded-pill px-5 py-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_2px_8px_rgba(0,0,0,0.04)]">
-        NuxtJS StarterKit
-      </NuxtLink>
-
-      <!-- Desktop Nav Links -->
-      <div class="hidden md:inline-flex items-center gap-6 bg-white/80 backdrop-blur-xl border border-portrait-mist/80 rounded-pill px-6 py-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_2px_8px_rgba(0,0,0,0.04)]">
-        <NuxtLink to="/about" class="text-portrait-slate text-sm font-medium hover:text-portrait-ink transition-colors">About</NuxtLink>
-        <NuxtLink to="/profile" class="text-portrait-slate text-sm font-medium hover:text-portrait-ink transition-colors">Profile</NuxtLink>
-        <NuxtLink to="/contact" class="text-portrait-slate text-sm font-medium hover:text-portrait-ink transition-colors">Contact</NuxtLink>
-        <NuxtLink to="/post" class="text-portrait-slate text-sm font-medium hover:text-portrait-ink transition-colors">Post</NuxtLink>
-      </div>
-
-      <!-- Mobile Hamburger -->
-      <button
-        ref="hamburger"
-        class="md:hidden relative w-11 h-11 bg-white/80 backdrop-blur-xl border border-portrait-mist/80 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.04)] flex items-center justify-center group"
-        @click="toggleMenu"
-        :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
-      >
-        <span class="sr-only">{{ menuOpen ? 'Close' : 'Menu' }}</span>
-        <div class="w-5 h-4 flex flex-col justify-between">
-          <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? 'translate-y-[7px] rotate-45' : ''"></span>
-          <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300" :class="menuOpen ? 'opacity-0 scale-x-0' : ''"></span>
-          <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? '-translate-y-[7px] -rotate-45' : ''"></span>
+    <nav class="sticky top-6 z-50 flex justify-center items-center px-4">
+      <div class="inline-flex items-center justify-between bg-white/80 backdrop-blur-xl border border-portrait-mist/80 rounded-pill px-4 py-2 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300"
+           :class="menuOpen ? 'w-14' : 'w-auto'">
+        
+        <!-- Desktop Nav / Brand -->
+        <div class="flex items-center gap-6 transition-opacity duration-200" :class="menuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'">
+          <NuxtLink to="/" class="text-portrait-ink font-display font-semibold text-base tracking-tight hover:text-portrait-teal transition-colors px-3">
+            Home
+          </NuxtLink>
+          <span class="w-px h-5 bg-portrait-ash"></span>
+          <NuxtLink :to="item.to" v-for="item in menuItems" :key="item.to" 
+            class="text-portrait-slate text-sm font-medium hover:text-portrait-ink transition-colors px-3"
+            :class="route.path === item.to ? 'text-portrait-ink font-bold' : ''">
+            {{ item.label }}
+          </NuxtLink>
         </div>
-      </button>
+
+        <!-- Mobile Hamburger -->
+        <button
+          ref="hamburger"
+          class="md:hidden w-11 h-11 flex items-center justify-center rounded-full hover:bg-portrait-mist/30 transition-colors relative z-10"
+          @click="toggleMenu"
+          :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
+        >
+          <div class="w-5 h-4 flex flex-col justify-between">
+            <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? 'translate-y-[7px] rotate-45' : ''"></span>
+            <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300" :class="menuOpen ? 'opacity-0 scale-x-0' : ''"></span>
+            <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? '-translate-y-[7px] -rotate-45' : ''"></span>
+          </div>
+        </button>
+      </div>
     </nav>
 
     <!-- Mobile Slide-in Menu Overlay -->
@@ -45,10 +48,9 @@
       <div
         v-if="menuOpen"
         ref="menuPanel"
-        class="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl border-l border-portrait-mist/60 flex flex-col md:hidden transition-all duration-300 ease-in-out"
+        class="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl border-l border-portrait-mist/60 flex flex-col md:hidden transition-transform duration-300 ease-in-out"
         :class="menuOpen ? 'translate-x-0' : 'translate-x-full'"
       >
-
         <!-- Menu Header -->
         <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-portrait-mist/60">
           <span class="font-display font-semibold text-portrait-ink">Menu</span>
@@ -64,7 +66,8 @@
             :key="item.to"
             :to="item.to"
             @click="closeMenu"
-            class="flex items-center gap-4 px-4 py-3.5 rounded-card text-portrait-ink font-display font-medium text-lg hover:bg-pastel-sky/30 transition-all duration-200"
+            class="flex items-center gap-4 px-4 py-3.5 rounded-card transition-all duration-200"
+            :class="route.path === item.to ? 'bg-pastel-sky/60 text-portrait-ink font-bold' : 'text-portrait-ink font-medium hover:bg-pastel-sky/30'"
           >
             <span class="w-9 h-9 rounded-xl bg-pastel-sky/50 flex items-center justify-center text-lg">
               {{ item.icon }}
@@ -86,9 +89,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import gsap from 'gsap'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const menuOpen = ref(false)
 const menuPanel = ref(null)
 
@@ -107,33 +111,14 @@ function closeMenu() {
   menuOpen.value = false
 }
 
-// Animate panel slide-in/out
-watch(menuOpen, (open) => {
-  if (open) {
-    document.body.style.overflow = 'hidden'
-    // REMOVED setTimeout to prevent delay
-    if (menuPanel.value) {
-      gsap.fromTo(menuPanel.value,
-        { x: '100%' },
-        { x: '0%', duration: 0.3, ease: 'power3.out' }
-      )
-    }
-  } else {
-    document.body.style.overflow = ''
-  }
-})
-
 onMounted(() => {
-  // Close on Escape key
-  const handleKey = (e) => {
+  window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu()
-  }
-  window.addEventListener('keydown', handleKey)
+  })
 })
 </script>
 
 <style scoped>
-/* Overlay transition */
 .overlay-enter-active,
 .overlay-leave-active {
   transition: opacity 0.3s ease;
@@ -143,7 +128,6 @@ onMounted(() => {
   opacity: 0;
 }
 
-/* Panel transition for leave (slide back to right) */
 .panel-leave-active {
   transition: transform 0.25s ease-in;
 }
