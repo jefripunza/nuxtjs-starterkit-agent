@@ -1,25 +1,19 @@
 <template>
   <div class="min-h-screen bg-portrait-canvas font-body text-portrait-body">
-    <!-- ===== MOBILE NAVBAR (brand kiri, hamburger kanan) ===== -->
-    <nav class="md:hidden sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-portrait-mist/60">
-      <div class="flex items-center justify-between px-4 py-2.5">
-        <NuxtLink to="/" class="text-portrait-ink font-display font-semibold text-base tracking-tight">
-          NuxtJS StarterKit
-        </NuxtLink>
-        <button
-          ref="hamburger"
-          class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-portrait-mist/30 transition-colors -mr-1"
-          @click="toggleMenu"
-          :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
-        >
-          <div class="w-5 h-4 flex flex-col justify-between">
-            <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? 'translate-y-[7px] rotate-45' : ''"></span>
-            <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300" :class="menuOpen ? 'opacity-0 scale-x-0' : ''"></span>
-            <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? '-translate-y-[7px] -rotate-45' : ''"></span>
-          </div>
-        </button>
+    <!-- ===== MOBILE FLOATING HAMBURGER (tombol melayang, tanpa header) ===== -->
+    <button
+      ref="hamburger"
+      class="md:hidden fixed top-5 right-5 z-50 w-11 h-11 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-xl border border-portrait-mist/70 shadow-[0_2px_8px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-lg transition-all duration-200"
+      @click="toggleMenu"
+      :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
+      :class="menuOpen ? 'rotate-90 scale-95' : ''"
+    >
+      <div class="w-5 h-4 flex flex-col justify-between">
+        <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? 'translate-y-[7px] rotate-45' : ''"></span>
+        <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300" :class="menuOpen ? 'opacity-0 scale-x-0' : ''"></span>
+        <span class="block h-0.5 w-5 bg-portrait-ink rounded-full transition-all duration-300 origin-center" :class="menuOpen ? '-translate-y-[7px] -rotate-45' : ''"></span>
       </div>
-    </nav>
+    </button>
 
     <!-- ===== DESKTOP NAVBAR (pill di tengah) ===== -->
     <nav class="hidden md:flex sticky top-6 z-50 justify-center px-4">
