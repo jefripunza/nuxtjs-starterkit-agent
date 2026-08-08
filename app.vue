@@ -59,13 +59,9 @@
           :key="item.to"
           :to="item.to"
           @click="closeMenu"
-          class="flex items-center gap-4 px-4 py-3.5 rounded-card transition-all duration-200"
+          class="flex items-center px-4 py-3 rounded-pill transition-all duration-200"
           :class="isActive(item.to) ? 'bg-portrait-ink text-white shadow-sm' : 'text-portrait-ink font-medium hover:bg-pastel-sky/30'"
         >
-          <span class="w-9 h-9 rounded-xl flex items-center justify-center text-lg"
-            :class="isActive(item.to) ? 'bg-white/20' : 'bg-pastel-sky/50'">
-            {{ item.icon }}
-          </span>
           {{ item.label }}
         </NuxtLink>
       </nav>
